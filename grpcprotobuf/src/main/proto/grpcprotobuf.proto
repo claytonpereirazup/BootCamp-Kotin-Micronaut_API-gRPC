@@ -2,19 +2,40 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "br.com.zupacademy";
-option java_outer_classname = "Grpcprotobuf";
-option objc_class_prefix = "HLW";
+option java_outer_classname = "FuncionarioServiceOuterClass";
 
 package br.com.zupacademy;
 
-service GrpcprotobufService {
-  rpc send (GrpcprotobufRequest) returns (GrpcprotobufReply) {}
+import "google/protobuf/timestamp.proto";
+
+service FuncionarioService {
+  rpc cadastrar (FuncionarioRequest) returns (FuncionarioResponse) {}
 }
 
-message GrpcprotobufRequest {
+message FuncionarioRequest {
   string name = 1;
+  string cpf = 2;
+  int32 idade = 3;
+  double salario = 4;
+  bool ativo = 5;
+  Cargo cargo = 6;
+
+  message Endereco {
+    string logradouro = 1;
+    string cep = 2;
+    string complemento = 3;
+  }
+
+  repeated Endereco enderecos = 7;
 }
 
-message GrpcprotobufReply {
-  string message = 1;
+message FuncionarioResponse {
+  string name = 1;
+  google.protobuf.Timestamp criadoEm = 2;
+}
+
+enum Cargo {
+  DEV = 0; //Defautl - não é serializado
+  QA = 1;
+  GERENTE = 2;
 }
