@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zupacademy";
+option java_outer_classname = "Grpcprotobuf";
+option objc_class_prefix = "HLW";
+
+package br.com.zupacademy;
+
+service GrpcprotobufService {
+  rpc send (GrpcprotobufRequest) returns (GrpcprotobufReply) {}
+}
+
+message GrpcprotobufRequest {
+  string name = 1;
+}
+
+message GrpcprotobufReply {
+  string message = 1;
+}
